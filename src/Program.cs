@@ -7,6 +7,8 @@ public class Program
 
     static void Main(string[] args)
     {
+        Console.CancelKeyPress += new ConsoleCancelEventHandler(onExit);
+
         ArgParser argParser = new ArgParser(args);
 
         if (
@@ -111,5 +113,10 @@ public class Program
         Console.WriteLine("-d <directory_with_video_files> # directory to stream from");
         Console.WriteLine($"-p <port> # port to stream on, default port is {ArgParser.DEFAULT_PORT}");
         Console.WriteLine("you have to use -f or -d flag");
+    }
+
+    private static void onExit(object? sender, ConsoleCancelEventArgs e)
+    {
+        Environment.Exit(0);
     }
 }
