@@ -23,6 +23,18 @@ public class Program
             return;
         }
 
+        // Check if file or directory is valid
+        if (!string.IsNullOrEmpty(argParser.file) && !argParser.checkFileArgument())
+        {
+            Console.WriteLine("Given file doesn't exist.");
+            return;
+        }
+        else if (!string.IsNullOrEmpty(argParser.directory) && !argParser.checkDirectoryArgument())
+        {
+            Console.WriteLine("Given directory doesn't exist.");
+            return;
+        }
+
         // if (!string.IsNullOrEmpty(argPaser.file)) {
         //     string? filePath = argPaser.getPathToTheFile();
         //     if (!string.IsNullOrEmpty(filePath))

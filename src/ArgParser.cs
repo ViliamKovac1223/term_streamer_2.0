@@ -37,6 +37,20 @@ public class ArgParser
         }
     }
 
+    public bool checkFileArgument()
+    {
+        if (string.IsNullOrEmpty(file)) return false;
+
+        return File.Exists(file);
+    }
+
+    public bool checkDirectoryArgument()
+    {
+        if (string.IsNullOrEmpty(directory)) return false;
+
+        return Directory.Exists(directory);
+    }
+
     public string? getPathToTheFile()
     {
         if (string.IsNullOrEmpty(file)) return null;
