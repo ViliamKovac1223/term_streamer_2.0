@@ -1,0 +1,7 @@
+src/bin/
+src/obj/
+src/wwwroot/videojs/
+src/wwwroot/style/*.css
+src/wwwroot/style/*.css.map
+LibGetoptLike/
+
