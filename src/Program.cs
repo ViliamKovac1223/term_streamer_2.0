@@ -47,6 +47,14 @@ public class Program
         //     return ;
         // }
 
+        DirectoryDetails root;
+        if (argParser.directory != null)
+            root = new DirectoryDetails(argParser.directory,
+                    argParser.directory,
+                    DirectoryDetails.ROOT_DIRECTORY_NAME);
+        else
+            root = new DirectoryDetails("", "", "");
+
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
@@ -54,8 +62,11 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
         builder.Services.AddSingleton<ArgParser>(argParser);
         builder.Services.AddScoped<FileDetails>();
+        builder.Services.AddSingleton<DirectoryDetails>(root);
+
         builder.WebHost.UseUrls($"http://localhost:{argParser.port}/");
 
         var app = builder.Build();
