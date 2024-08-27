@@ -66,16 +66,7 @@ public class ArgParser
 
     public string? getFileName()
     {
-        if (string.IsNullOrEmpty(file)) return null;
-
-        int lastSlashIndex = file.LastIndexOf('/');
-
-        // If there is no slash in the file path, return entire file name
-        if (lastSlashIndex == -1) return file;
-
-        if (file.Length <= lastSlashIndex + 1) return null;
-
-        return file.Substring(lastSlashIndex + 1);
+        return Utils.getFileName(file);
     }
 
     public string? getFileExtension()
