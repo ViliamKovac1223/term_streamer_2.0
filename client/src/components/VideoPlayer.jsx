@@ -5,6 +5,8 @@ import '../../style/videoPlayer.scss'
 
 function VideoPlayer({ source }) {
     const playerRef = React.useRef(null);
+
+    /** @type {import('../types.js').VideoJsOptions} */
     const videoJsOptions = {
         autoplay: false,
         controls: true,

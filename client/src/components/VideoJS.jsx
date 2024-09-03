@@ -2,8 +2,15 @@ import React from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 
+
+/**
+ * Makes VideoJs component
+ * @param {import('../types.js').VideoJsProps} props - properties for videoJS
+ */
 export const VideoJS = (props) => {
+    /** @type {React.MutableRefObject<null>} */
     const videoRef = React.useRef(null);
+    /** @type {React.MutableRefObject<null>} */
     const playerRef = React.useRef(null);
     const { options, onReady } = props;
 
