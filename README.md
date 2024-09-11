@@ -39,11 +39,19 @@ cd src
 dotnet build
 ```
 
-After building program you can copy binary to the folder which is in the $PATH
+To build the frontend, go to the client folder, and run commands to install
+frontend dependencies and building frontend.
+```bash
+cd ../client
+npm install
+npm run build
+```
+
+After building program you can link binary to the folder which is in the $PATH
 variable.
 
 ```bash
-cp ./bin/Debug/net8.0/term-streamer_2.0 ~/.local/bin/
+ln -s $(pwd)/bin/Debug/net8.0/term-streamer_2.0 ~/.local/bin/term-streamer_2.0
 ```
 
 # Fake internet money
