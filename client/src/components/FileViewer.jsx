@@ -15,29 +15,33 @@ function FileViewer({ currDirectory, files, directories, prevDirectory }) {
     let dirs = [];
     let trimedFilePaths = [];
 
-    files.forEach((file) => {
-        let {last} = trimToLastFolder(file);
-        trimedFilePaths.push(last);
-    });
+    console.log("dirs: ", directories);
 
-    directories.forEach((dir) => {
-        let {last} = trimToLastFolder(dir);
-        dirs.push(last);
-    });
+    if (files != null)
+        files.forEach((file) => {
+            let {last} = trimToLastFolder(file);
+            trimedFilePaths.push(last);
+        });
+
+    if (directories != null)
+        directories.forEach((dir) => {
+            let {last} = trimToLastFolder(dir);
+            dirs.push(last);
+        });
 
     return (
         <div>
             <h1>{currDirectory}</h1>
-            {prevDirectory && <FolderView folderName='..' />}
+            {prevDirectory && <FolderView folderName='..' prevDirectory={prevDirectory}/>}
 
             {/*Render all directories*/}
             {directories && dirs.map((dir, index) => (
-                <FolderView key={index} folderName={dir} />
+                <FolderView key={index} folderName={dir} folderPath={directories.at(index)} />
             ))}
 
             {/*Render all files*/}
             {files && trimedFilePaths.map((file, index) => (
-                <FileView key={index} fileName={file} />
+                <FileView key={index} fileName={file} currDirectory={currDirectory} />
             ))}
         </div>
     )
