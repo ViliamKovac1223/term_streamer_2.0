@@ -1,6 +1,33 @@
 public class Utils
 {
 
+    /// <summary>
+    /// Get parent directory from given path.
+    /// For example:
+    /// "/path/to/file" -> "/path/"
+    /// "/path/to/" -> "/path/"
+    /// </summary>
+    /// <param name="path">Given path.</param>
+    /// <returns>Parent's path.</returns>
+    public static string? getParentDirectory(string? path)
+    {
+        if (string.IsNullOrEmpty(path)) return null;
+        int lastSlashIndex = path.LastIndexOf('/');
+
+        // If there is no slash in the path, return null
+        if (lastSlashIndex == -1) return null;
+
+        // Remove the previously found slash
+        path = path.Substring(0, lastSlashIndex);
+
+        // Find and remove everything till second last slash
+        lastSlashIndex = path.LastIndexOf('/');
+        // If there is no second last slash, then return null;
+        // because there is no parent folder.
+        if (lastSlashIndex == -1) return null;
+        return path.Substring(0, lastSlashIndex + 1);
+    }
+
     public static string getAbsolutePath(string path)
     {
         string currDirectory = Environment.CurrentDirectory;

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.FileProviders;
+using System.Reflection;
 
 public class Program
 {
@@ -37,16 +38,6 @@ public class Program
             return;
         }
 
-        // if (!string.IsNullOrEmpty(argPaser.file)) {
-        //     string? filePath = argPaser.getPathToTheFile();
-        //     if (!string.IsNullOrEmpty(filePath))
-        //         Console.WriteLine(filePath);
-        //     string? fileName = argPaser.getFileName();
-        //     if (!string.IsNullOrEmpty(fileName))
-        //         Console.WriteLine(fileName);
-        //     return ;
-        // }
-
         DirectoryDetails root;
         if (argParser.directory != null)
             root = new DirectoryDetails(argParser.directory,
@@ -82,8 +73,24 @@ public class Program
         app.UseAuthorization();
         app.MapControllers();
 
-        app.UseFileServer();
+        // Get binary location
+        string binaryLocation = Assembly.GetExecutingAssembly().Location;
+        // Get a src directory relative to position of binary, it's 3 directory backwards
+        string? srcDirectory = binaryLocation;
+        for (int i = 0; i < 3; i++)
+            srcDirectory = Utils.getParentDirectory(srcDirectory);
+        if (srcDirectory == null)
+        {
+            Console.WriteLine("We couldn't locate wwwroot directory, make sure that binary is in original location. Never copy binary just link it.");
+            return;
+        }
+        string wwwrootDirectory = srcDirectory + "wwwroot/";
+
         app.UseStaticFiles();
+        app.UseFileServer(new FileServerOptions
+        {
+            FileProvider = new PhysicalFileProvider(wwwrootDirectory)
+        });
 
         // Add file directory to the streamable directories
         if (!string.IsNullOrEmpty(argParser.file))
