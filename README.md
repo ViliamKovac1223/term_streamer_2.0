@@ -29,7 +29,12 @@ You have to use -f or -d flag
 ## Install dependencies
 First you'll need to download and install
 [LibGetoptLike](https://github.com/ViliamKovac1223/LibGetoptLike), please refer
-to the LibGetoptLike documentation on installation.
+to the LibGetoptLike documentation on installation. You can easily install it
+by cloning the repo inside the main project folder.
+
+```bash
+git clone https://github.com/ViliamKovac1223/LibGetoptLike.git
+```
 
 ## Install program
 Building the application from the source:
@@ -51,6 +56,7 @@ After building program you can link binary to the folder which is in the $PATH
 variable.
 
 ```bash
+cd ../src
 ln -s $(pwd)/bin/Debug/net8.0/term-streamer_2.0 ~/.local/bin/term-streamer_2.0
 ```
 
