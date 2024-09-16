@@ -17,6 +17,12 @@ function FileViewer({ currDirectory, files, directories, prevDirectory }) {
 
     console.log("dirs: ", directories);
 
+    // Sort files and directories by alphabet
+    if (files != null)
+        files.sort();
+    if (directories != null)
+        directories.sort();
+
     if (files != null)
         files.forEach((file) => {
             let {last} = trimToLastFolder(file);
