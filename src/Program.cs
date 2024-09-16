@@ -58,7 +58,7 @@ public class Program
         builder.Services.AddScoped<FileDetails>();
         builder.Services.AddSingleton<DirectoryDetails>(root);
 
-        builder.WebHost.UseUrls($"http://localhost:{argParser.port}/");
+        builder.WebHost.UseUrls($"http://*:{argParser.port}/");
 
         var app = builder.Build();
 
